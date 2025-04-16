@@ -1,16 +1,16 @@
 import csv
 
-# Replace with your actual file path
 csv_file = 'ONSPD_FEB_2024_UK_BT.csv'
 
-# Create a list to store the values from the 'pcds' column
 pcds_values = []
 
 with open(csv_file, mode='r', newline='', encoding='utf-8') as file:
     reader = csv.DictReader(file)
     for row in reader:
-        # Access the value under the 'pcds' column
-        pcds_values.append(row['pcds'])
+        full_value = row['pcds']
+        before_space = full_value.split(' ')[0] 
 
-# Print all values
+        if not pcds_values or before_space != pcds_values[-1]:
+            pcds_values.append(before_space)
+
 print(pcds_values)
